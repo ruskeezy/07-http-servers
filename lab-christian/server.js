@@ -35,17 +35,16 @@ const server = http.createServer(function(req, res) {
 
   if(req.method === 'POST' && req.url.pathname === '/cowsay') {
     parseBody(req, function(err) {
-      if (err) console.error(err);
+      if (err) return console.error(err);
       if (req.body.message) {
         res.writeHead(200, { 'Content-Type': 'text/plain' });
         res.write(cowsay.say( { text: req.body.message }));
-        res.end();
       }
       if (!req.body.message) {
         res.writeHead(400, { 'Content-Type': 'text.plain' });
         res.write(cowsay.say( { text: 'bad request' }));
-        res.end();
       }
+      res.end();
     });
   }
 
