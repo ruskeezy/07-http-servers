@@ -17,6 +17,7 @@ const server = http.createServer(function(req, res) {
     res.writeHead(200, {'Content-Type': 'text/plain'});
     res.write('hello from my server!');
     res.end();
+    return;
   }
 
   if(req.method === 'GET' && req.url.pathname === '/cowsay') {
@@ -25,6 +26,7 @@ const server = http.createServer(function(req, res) {
       res.writeHead(200, { 'Content-Type': 'text/plain'} );
       res.write(cowsay.say( { text: params.text }));
       res.end();
+      return;
     }
     if (!params.text) {
       res.writeHead(400, { 'Content-Type': 'text/plain' });
@@ -39,6 +41,7 @@ const server = http.createServer(function(req, res) {
         res.writeHead(200, { 'Content-Type': 'text/plain' });
         res.write(cowsay.say( { text: req.body.message }));
         res.end();
+        return;
       }
       if (!req.body.message) {
         res.writeHead(400, { 'Content-Type': 'text.plain' });
@@ -48,6 +51,7 @@ const server = http.createServer(function(req, res) {
     });
   }
 });
+
 
 server.listen(PORT, () => {
   console.log(`Server up on PORT ${PORT}`);
