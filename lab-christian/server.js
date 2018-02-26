@@ -11,15 +11,6 @@ const server = http.createServer(function(req, res) {
   req.url = url.parse(req.url);
   req.url.query = querystring.parse(req.url.query);
 
-
-  // doesn't need a pathname, the default path is "/"
-  if(req.method === 'GET') {
-    res.writeHead(200, {'Content-Type': 'text/plain'});
-    res.write('hello from my server!');
-    res.end();
-    return;
-  }
-
   if(req.method === 'GET' && req.url.pathname === '/cowsay') {
     let params = req.url.query;
     if (params.text) {
@@ -33,6 +24,14 @@ const server = http.createServer(function(req, res) {
       res.write(cowsay.say( { text: 'bad request' }));
       res.end();
     }
+  }
+
+  // doesn't need a pathname, the default path is "/"
+  if(req.method === 'GET') {
+    res.writeHead(200, {'Content-Type': 'text/plain'});
+    res.write('hello from my server!');
+    res.end();
+    return;
   }
 
   if(req.method === 'POST' && req.url.pathname === '/cowsay') {
