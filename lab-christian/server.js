@@ -23,6 +23,7 @@ const server = http.createServer(function(req, res) {
       res.writeHead(400, { 'Content-Type': 'text/plain' });
       res.write(cowsay.say( { text: 'bad request' }));
       res.end();
+      return;
     }
   }
 
@@ -45,7 +46,8 @@ const server = http.createServer(function(req, res) {
       if (!req.body.message) {
         res.writeHead(400, { 'Content-Type': 'text.plain' });
         res.write(cowsay.say( { text: 'bad request' }));
-        res.end();        
+        res.end(); 
+        return;       
       }
     });
   }
